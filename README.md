@@ -19,10 +19,7 @@ SAMIRA BECERRA:
 ● Calidad de trabajo: Su calidad de trabajo puede mejorar, tiene muchas dudas y falta confianza al momento de sugerir ideas).
 
 MAXIMILIANO MIÑO:
-● Participación:
-● Responsabilidad: 
-● Comunicación: 
-● Calidad de trabajo:
+Su participación fue satisfactoria, con una mejor comunicación que en la primera tarea y una proactividad notable en el momento de organizar. su aporte en la tarea fue buena, corrigiendo errores y haciendo funciones que cumplen con lo que piden.
 
 TOMÁS PEREZ: 
 ● Participación:Buena aportacion en ideas para problemas pequeños
