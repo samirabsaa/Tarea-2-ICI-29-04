@@ -254,7 +254,7 @@ const char *get_csv_field (char * tmp, int k) {
   fgets (linea, 1023, fp);
   
   listaaux = createList();
-  char *itm = (char*)malloc(sizeof(char)*100);
+  //char *itm = (char*)malloc(sizeof(char)*100);
   //char *aux = (char*)malloc(sizeof(char)*100);
   while (fgets (linea, 1023, fp) != NULL) { // Se lee la linea
     Perfil *datos = malloc(sizeof(Perfil));
@@ -275,9 +275,7 @@ const char *get_csv_field (char * tmp, int k) {
         datos ->num_items = atoi(aux);
       }else{
         if(aux != NULL){
-          strcpy(itm, aux);
-          //printf("item: %s\n", itm);
-          pushFront(datos -> items, itm);
+          pushFront(datos -> items, aux);
        }
       }
       i++;
