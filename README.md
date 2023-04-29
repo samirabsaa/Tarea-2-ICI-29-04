@@ -14,7 +14,7 @@ G: Como grupo el trabajo en equipo mejoró considerablemente, de igual modo, la 
 (4) coevaluación del aporte individual de cada integrante (usando rúbrica).
 SAMIRA BECERRA: 
 ● Participación:Esta presente en las oportunidades en las que el grupo se reúne, aumenta su participación y realiza sus dudas/sugerencias al momento de trabajar. 
-● Responsabilidad: 
+● Responsabilidad: Esta presente cuando el grupo se reúne. 
 ● Comunicación: Mantiene un trato respetuoso y cordial con los integrantes del grupo, además de consultar respectivas dudas.
 ● Calidad de trabajo: Su calidad de trabajo puede mejorar, tiene muchas dudas y falta confianza al momento de sugerir ideas).
 
