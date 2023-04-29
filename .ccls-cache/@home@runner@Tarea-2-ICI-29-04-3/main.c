@@ -434,12 +434,16 @@ int main()
             printf("Accion deshecha\n");
             break;
             case 3:
+            printf("hola\n");
             aux = firstList(lista);
+            //printf("%d\n", aux->PH);
             while(aux != NULL)
               {
                 if(aux == busqueda(ult_accion->nombre, lista))
                 {
+                  printf("%d\n", aux->PH);
                   aux->PH -= ult_accion->PH_an;
+                  //printf("%d\n", aux->PH );
                   break;
                 }
                 aux = nextList(lista);
