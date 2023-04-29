@@ -6,7 +6,7 @@ El comando que se usa para compilar la tares es ./Tarea2
 El programa funciona correctamente sin ningun error.
 
 (3) coevaluación del trabajo en equipo (usando rúbrica);
-G: 
+G: El trabajo en equipo mejoró considerablemente en cuanto a comunicación. 
 
 (4) coevaluación del aporte individual de cada integrante (usando rúbrica).
 SAMIRA BECERRA: 
