@@ -439,9 +439,9 @@ int main()
             //printf("%d\n", aux->PH);
             while(aux != NULL)
               {
+                printf("hola\n");
                 if(aux == busqueda(ult_accion->nombre, lista))
                 {
-                  printf("%d\n", aux->PH);
                   aux->PH -= ult_accion->PH_an;
                   //printf("%d\n", aux->PH );
                   break;
