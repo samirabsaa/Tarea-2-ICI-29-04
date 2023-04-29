@@ -1,9 +1,9 @@
 Además deben anexar un archivo README indicando: 
 (1) cómo compilar y ejecutar la tarea; 
-
+El comando que se usa para compilar la tares es ./Tarea2
 
 (2) las opciones que funcionan correctamente y las que no lo hacen indicando posibles causas;
-
+El programa funciona correctamente sin ningun error.
 
 (3) coevaluación del trabajo en equipo (usando rúbrica);
 G: 
