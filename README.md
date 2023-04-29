@@ -25,10 +25,10 @@ MAXIMILIANO MIÑO:
 ● Calidad de trabajo:
 
 TOMÁS PEREZ: 
-● Participación:
-● Responsabilidad: 
-● Comunicación: 
-● Calidad de trabajo:
+● Participación:Buena aportacion en ideas para problemas pequeños
+● Responsabilidad: siempre esta atento para saber si puede aportar para la solucion de complicaciones
+● Comunicación: siempre intenta avisar cuando, faltara en una ocacion, o intenta dar a conocer cuales son los problemas en los cuales se encuentra.
+● Calidad de trabajo: aunque aporte ideas y maneras de solucionar problemas, puede mejorar la confianza para aplicar estas soluciones, sabiendo el riesgo que estas pueden contener
 
 FRANCISCA SILVA: 
 ● Participación: Buena participación en las actividades que se realizan
