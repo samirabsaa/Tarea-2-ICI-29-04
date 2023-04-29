@@ -63,6 +63,7 @@ void * busqueda (char *nombreJ, List *lista){
    }
    
    char *items = firstList(aux->items);
+   printf("item: %s\n", items);
    printf("\nPERFIL JUGADOR:\n");
    printf(" * Nombre jugador: %s \n", aux->nombre);
    printf(" * Puntaje habilidades: %d\n", aux->PH);
@@ -128,7 +129,7 @@ void * busqueda (char *nombreJ, List *lista){
  }
 
  //5. AGREGAR PUNTOS HABILIDAD 
- void agregar_ph(char *nombre, List *lista,Pila * accion){
+ void agregar_ph(char *nombre, List *lista, Pila * accion){
    int puntos;
    Perfil * aux;
    aux = (Perfil *) malloc(sizeof(Perfil));
@@ -253,7 +254,8 @@ const char *get_csv_field (char * tmp, int k) {
   fgets (linea, 1023, fp);
   
   listaaux = createList();
-  char *itm =(char*)malloc(sizeof(char)*100);
+  char *itm = (char*)malloc(sizeof(char)*100);
+  char *aux = (char*)malloc(sizeof(char)*100);
   while (fgets (linea, 1023, fp) != NULL) { // Se lee la linea
     Perfil *datos = malloc(sizeof(Perfil));
     i=0;
@@ -262,7 +264,7 @@ const char *get_csv_field (char * tmp, int k) {
       aux = (char*)get_csv_field(linea, i); // Se obtiene el nombre
       datos ->items = createList();
       if(i == 0){
-        strcpy(datos ->nombre,aux );
+        strcpy(datos ->nombre, aux );
       }
       else if(i == 1)
       {
@@ -273,7 +275,7 @@ const char *get_csv_field (char * tmp, int k) {
         datos ->num_items = atoi(aux);
       }else{
         if(aux != NULL){
-          strcpy(itm,aux);
+          strcpy(itm, aux);
           pushFront(datos -> items, itm);
         }
       }
