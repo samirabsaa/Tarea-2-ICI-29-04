@@ -6,6 +6,7 @@ Además deben anexar un archivo README indicando:
 
 (2) las opciones que funcionan correctamente y las que no lo hacen indicando posibles causas:
 El programa funciona correctamente sin ningun error.
+*al agregar puntaje y luego deshacer, no se realiza correctamente 
 
 (3) coevaluación del trabajo en equipo (usando rúbrica);
 G: Como grupo el trabajo en equipo mejoró considerablemente, de igual modo, la participación de cada integrante tuvo una mejoría, lo cual se demostó en cada sesión que tuvo el grupo para realizar la tarea.
@@ -30,8 +31,8 @@ TOMÁS PEREZ:
 ● Calidad de trabajo:
 
 FRANCISCA SILVA: 
-● Participación:
-● Responsabilidad: 
-● Comunicación: 
-● Calidad de trabajo:
+● Participación: Buena participación en las actividades que se realizan
+● Responsabilidad: Esta presente cuando el grupo se reúne y atenta a las entregas de las actividades
+● Comunicación: Buena comunicación con el grupo y también ha mejorado en cuanto a preguntar dudas en los trabajos a los demás integrantes.
+● Calidad de trabajo: Aporta ideas y soluciones, sin embargo ciertas partes de estas pueden ser menos eficientes que otras. 
 
