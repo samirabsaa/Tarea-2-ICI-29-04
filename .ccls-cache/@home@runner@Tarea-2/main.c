@@ -254,8 +254,6 @@ const char *get_csv_field (char * tmp, int k) {
   fgets (linea, 1023, fp);
   
   listaaux = createList();
-  //char *itm = (char*)malloc(sizeof(char)*100);
-  //char *aux = (char*)malloc(sizeof(char)*100);
   while (fgets (linea, 1023, fp) != NULL) { // Se lee la linea
     Perfil *datos = malloc(sizeof(Perfil));
     i=0;
@@ -285,7 +283,6 @@ const char *get_csv_field (char * tmp, int k) {
   printf("importada de manera exitosa\n");
   return listaaux;     
 }
-   
    
 int main()
 {
