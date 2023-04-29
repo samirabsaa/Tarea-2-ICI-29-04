@@ -5,7 +5,6 @@
 #include <stdbool.h>
 #include <math.h>
 #include "list.h"
-#include "map.h"
 #include "stack.h"
 #define BARRA printf(" ------------------------------------------------------\n")
 
@@ -15,7 +14,6 @@ typedef struct{
   int PH;
   int num_items;
   List *items;
-  Stack * accion;
 }Perfil; 
 
 typedef struct{
@@ -25,12 +23,6 @@ typedef struct{
   int PH_an; //puntos añadidos, si es que se realiza la accion de añadir PH
 }Pila;
 
-// Mapa de jugadores con el item en especifico
-typedef struct
-{
-  char *key;
-  const void *data;
-}JCI;
 
 //FUNCIONES ADICIONALES 
 void * busqueda (char *nombreJ, List *lista){
@@ -71,32 +63,26 @@ void * busqueda (char *nombreJ, List *lista){
    }
    
    char *items = firstList(aux->items);
-   printf("\nPerfil jugador:\n");
+   printf("\nPERFIL JUGADOR:\n");
    printf(" * Nombre jugador: %s \n", aux->nombre);
    printf(" * Puntaje habilidades: %d\n", aux->PH);
    if(aux->num_items == 0){
      printf("Jugador/a no tiene ningún item\n");   
    }
    else{
-      printf(" * Inventario de items obtenidos:\n");
-      while(items != NULL){
-        printf("     - %s\n",items);
-        items = nextList(aux->items);
-      }
+     printf(" * Numero de items: %i\n", aux->num_items);
+     printf(" * Inventario de items obtenidos:\n");
+     while(items != NULL){
+       printf("     - %s\n",items);
+       items = nextList(aux->items);
+     }
    }
  }
 
  //3. AGREGAR ITEM JUGADOR 
- void agregar_item(char *nombre,List *lista,Pila *accion){
-  char *nomI;
-  char lectura[100];
-  
-  printf("Ingrese el nombre del ítem que desea añadir\n");
-  scanf("%99[^\n]s",lectura);
-  getchar();
-  nomI = malloc(sizeof(char)*strlen(lectura));
-  strcpy(nomI, lectura);
+ void agregar_item(char *nombre,List *lista,char *item){
   Perfil *aux = busqueda(nombre, lista);
+  
   if(aux == NULL)
   {
     printf("El jugador no existe\n");
@@ -107,35 +93,21 @@ void * busqueda (char *nombreJ, List *lista){
     aux->items = createList();
   }
   aux->num_items++;
-  pushFront(aux->items, nomI);
-  strcpy(accion->nombre, nombre);
-  strcpy(accion->item, nomI);
-  accion->accion = 1;
+  char *itm= malloc(sizeof(char)*strlen(item));
+  strcpy(itm,item);
+  printf("  (%s)  \n\n",itm);
+  pushFront(aux->items, itm);
  }
 
  //4. ELIMINAR ITEM JUGADOR
- void eliminar_item(List *lista,Pila *accion){
+ void eliminar_item(List *lista,char *nombre,char *item){
   Perfil* jugador = firstList(lista);
-  char lectura[100];
-  char * nombre;
-  char *item;
- 
-  printf("Ingrese nombre jugador al que desea eliminar ítem\n");
-  getchar();
-  scanf("%99[^\n]s", lectura);
-  nombre = malloc(sizeof(char)*strlen(lectura));
-  strcpy(nombre, lectura);
   jugador = busqueda(nombre, lista);
   if(jugador == NULL){
     printf("NO SE PUDO ELIMINAR ÍTEM, PUES NO EXISTE JUGADOR\n");
     return; 
   } 
   
-  printf("Ingrese el nombre del ítem que desea eliminar\n");
-  getchar();
-  scanf("%99[^\n]s", lectura);
-  item = malloc(sizeof(char)*strlen(lectura));
-  strcpy(item, lectura);
   if(firstList(jugador -> items)  == NULL){
     printf("el jugador no posee ningun objeto\n");
     return;
@@ -145,10 +117,7 @@ void * busqueda (char *nombreJ, List *lista){
    {
      popCurrent(jugador -> items);
      jugador -> num_items--;
-     printf("se elimino el objeto en cuestion\n");
-     strcpy(accion->nombre,nombre);
-     strcpy(accion->item,item);
-     accion->accion = 2;
+     printf("se eliminó el objeto en cuestion\n");
      return;
    }else{
      printf("el objeto en cuestion no lo posee el jugador\n");
@@ -156,11 +125,10 @@ void * busqueda (char *nombreJ, List *lista){
 
   printf("\n");
   BARRA;
-  
  }
 
  //5. AGREGAR PUNTOS HABILIDAD 
- void agregar_ph(char *nombre, List *lista,Pila *accion){
+ void agregar_ph(char *nombre, List *lista,Pila * accion){
    int puntos;
    Perfil * aux;
    aux = (Perfil *) malloc(sizeof(Perfil));
@@ -179,25 +147,145 @@ void * busqueda (char *nombreJ, List *lista){
    //printf("puntajenombreombreombre %d", aux->PH);*/
  }
 
+ //6. MOSTRAR JUGADORES ITEM ESPECIFICO 
+void mostrar_iEspecifico(List *lista){
+  char lectura[100];
+  char *item;
+  bool hay = false;
+  Perfil *aux = firstList(lista);
+  printf("que objeto desea saber quien tiene\n");
+  getchar();
+  scanf("%99[^\n]s", lectura);
+  getchar();
+  item = malloc(sizeof(char)*strlen(lectura));
+  strcpy(item,lectura);
+  while(aux != NULL){
+    if(busqueda(item, aux -> items) != NULL){
+      if(hay == false){
+        printf("Los jugadores con este objeto son:\n");
+        hay = true;
+      }
+      printf("  * %s\n", aux ->nombre);
+    } 
+    aux = nextList(lista);
+  }
+  if(hay == false) printf("no existe un jugador con ese objeto\n");
+  BARRA;
+}
 
- /*//6. MOSTRAR JUGADORES ITEM ESPECIFICO 
- void mostrar_iEspecifico(item){
- 
- }
-
-//7. DESHACER ÚLTIMA ACCIÓN
- void deshacer_uAccion(char *nombre){
-   La idea seria que: 
-   si la pila esta vacia, quiere decir que no hay ninguna acción ( agregar/eliminar item y/o agregar puntos) para deshacer, sino que se elimine lo último que se guardó en la pila y se disminuya el top en 1
-   
- }
  //8. EXPORTAR ARCHIVO
- void exportar_datos(nombre_archivo){}
+ void exportar_datos(List *lista){
+    char salida[150];
+    printf("Ingrese el nombre del archivo que desea crear\n");
+    getchar();
+    scanf("%149[^\n]s", salida );
+    getchar();
+    FILE *exit = fopen(salida, "w");
+    Perfil *jugador = firstList(lista);
+    while(jugador != NULL){
+      fprintf(exit,"%s,%i,%i,",jugador ->nombre, jugador -> PH, jugador -> num_items  );
+      char *itm = firstList(jugador ->items);
+      while(itm != NULL)
+      {
+        fprintf(exit, "%s,", itm);
+        itm = nextList(jugador -> items);
+      }
+      jugador = nextList(lista);
+      fprintf(exit,"\n");
+    }
+    fclose(exit);
+    printf("se creo el archivo exitosamente\n");
+    return;
+ }
 
  //9. CARGAR DATOS
- void cargar_datos(nombre_archivo){}*/ 
+//funcion hecha por el profe, si no funciona, culpen al profe.
+const char *get_csv_field (char * tmp, int k) {
+    int open_mark = 0;
+    char* ret=(char*) malloc (100*sizeof(char));
+    int ini_i=0, i=0;
+    int j=0;
+    while(tmp[i+1]!='\0'){
+        if(tmp[i]== '\"'){
+            open_mark = 1-open_mark;
+            if(open_mark) ini_i = i+1;
+            i++;
+            continue;
+        }
 
+        if(open_mark || tmp[i]!= ','){
+            if(k==j) ret[i-ini_i] = tmp[i];
+            i++;
+            continue;
+        }
 
+        if(tmp[i]== ','){
+            if(k==j) {
+               ret[i-ini_i] = 0;
+               return ret;
+            }
+            j++; ini_i = i+1;
+        }
+
+        i++;
+    }
+    if(k==j) {
+       ret[i-ini_i] = 0;
+       return ret;
+    }
+    return NULL;
+}
+
+ List * cargar_datos(){
+  List *listaaux;
+  char archivo[100];
+  printf("¿Qué archivo desea importar?\n");
+  getchar();
+  scanf("%99[^\n]",archivo);
+  getchar();
+  FILE *fp = fopen (archivo, "r");
+  if(fp == NULL){
+    printf("el archivo no existe\n");
+    return NULL; 
+  } 
+  char linea[1024];
+  int i;
+  fgets (linea, 1023, fp);
+  
+  listaaux = createList();
+  char *itm =(char*)malloc(sizeof(char)*100);
+  while (fgets (linea, 1023, fp) != NULL) { // Se lee la linea
+    Perfil *datos = malloc(sizeof(Perfil));
+    i=0;
+    char *aux = (char*)get_csv_field(linea, i);
+    while(aux != NULL){
+      aux = (char*)get_csv_field(linea, i); // Se obtiene el nombre
+      datos ->items = createList();
+      if(i == 0){
+        strcpy(datos ->nombre,aux );
+      }
+      else if(i == 1)
+      {
+        datos ->PH = atoi(aux);
+      }
+      else if(i == 2)
+      {
+        datos ->num_items = atoi(aux);
+      }else{
+        if(aux != NULL){
+          strcpy(itm,aux);
+          pushFront(datos -> items, itm);
+        }
+      }
+      i++;
+    }
+    pushFront(listaaux, datos);
+  }
+  printf("importada de manera exitosa\n");
+  return listaaux;     
+}
+   
+   
 int main()
 {
   List *lista = NULL;
@@ -221,13 +309,12 @@ int main()
     printf("|7. Deshacer última acción de jugador/a                |\n");
     printf("|8. Exportar datos de jugadores a archivo de texto     |\n");
     printf("|9. Cargar datos de jugadores desde un archivo de texto|\n");
-    printf("|0. Terminar                                           |\n");  
+    printf("|0. Terminar                                           |\n"); 
     BARRA;
     
     scanf("%i",&comando);
-    
     char nombreJ [100];
-    
+    char nombreI [100];
     switch(comando){
       case 1:
         printf("Crear perfil de jugador/a\n");
@@ -236,7 +323,7 @@ int main()
           lista = createList();
           listacreada = true;
         }
-         crear_perfil(lista);
+        crear_perfil(lista);
         printf("Perfil creado\n");
         BARRA;
         break;
@@ -270,7 +357,16 @@ int main()
           printf("El jugador no existe\n");
           break;
         }
-        agregar_item(nombreJ, lista, ult_accion);
+        printf("Ingrese el nombre del ítem que desea añadir\n");
+        scanf("%99[^\n]s",nombreI);
+        getchar();
+        //printf("(1)\n");
+        
+        agregar_item(nombreJ, lista, nombreI);
+        
+        strcpy(ult_accion->nombre,nombreJ);
+        strcpy(ult_accion->item,nombreI);
+        ult_accion->accion = 1;
         BARRA;
         break;
       
@@ -280,8 +376,22 @@ int main()
           printf("No hay jugadores\n");
           break;
         }
-        eliminar_item(lista, ult_accion);
-        BARRA;
+        printf("¿ A que jugador desea eliminar un item?\n");
+        getchar();
+        scanf("%99[^\n]s", nombreJ);
+        getchar();
+        if(busqueda(nombreJ, lista)== NULL)
+        {
+          printf("El jugador no existe\n");
+          break;
+        }
+        printf("¿Qué item desea eliminar?\n");
+        scanf("%99[^\n]s",nombreI);
+        getchar();
+        eliminar_item(lista,nombreJ,nombreI);
+        strcpy(ult_accion->nombre, nombreJ);
+        strcpy(ult_accion->item, nombreI);
+        ult_accion->accion = 2;
         break;
       
       case 5:
@@ -304,8 +414,10 @@ int main()
       
       case 6:
         printf("Mostrar jugadores con item específico\n");
+        mostrar_iEspecifico(lista);
         break;
-      
+
+      //esto no funciona para 2 acciones seguidas y ademas no hay vuelta atras
       case 7:
         printf("Deshacer última acción de jugador/a\n");
         if(lista == NULL){
@@ -313,38 +425,46 @@ int main()
           break;
         }
         
-        /*switch(ult_accion->accion)
+        switch(ult_accion->accion)
           {
             case 1:
+            eliminar_item(lista, ult_accion->nombre, ult_accion->item);
+            printf("Accion deshecha\n");
             break;
             case 2:
+            agregar_item(ult_accion->nombre, lista, ult_accion->item);
+            printf("Accion deshecha\n");
             break;
             case 3:
-            
+            aux = firstList(lista);
+            while(aux != NULL)
+              {
+                if(aux == busqueda(ult_accion->nombre, lista))
+                {
+                  aux->PH -= ult_accion->PH_an;
+                  break;
+                }
+                aux = nextList(lista);
+              }
+            printf("Acción deshecha\n");
+            break;
             
           }
-        printf("Ingrese el nombre de el/la jugador/a\n");
-        getchar();
-        scanf("%99[^\n]s", nombreJ);
-        getchar();
-        if(busqueda(nombreJ, lista) == NULL){
-          printf("Tal jugador/a no existe\n");
-          break;
-        }
         //deshacer_uAccion(nombreJ);*/
         BARRA;
         break;
       
       case 8:
         printf("Exportar datos de jugadores a archivo de texto\n");
-        
+        exportar_datos(lista);
         break;
       
       case 9:
         printf("Cargar datos de jugadores desde un archivo de texto\n");
-        //lista = 
+        lista = cargar_datos(); 
         break;
       case 0:
+        if (lista != NULL) cleanList(lista);
         printf("░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n");
         printf("░░██████░░██████░░░█████░░░██████░██░░█████░░███████░\n");
         printf("░██░░░░░░░██░░░██░██░░░██░██░░░░░░██░██░░░██░██░░░░░░ \n");
