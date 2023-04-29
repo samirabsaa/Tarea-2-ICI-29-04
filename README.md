@@ -6,7 +6,7 @@ Además deben anexar un archivo README indicando:
 
 (2) las opciones que funcionan correctamente y las que no lo hacen indicando posibles causas:
 El programa funciona correctamente sin ningun error.
-*al agregar puntaje y luego deshacer, no se realiza correctamente 
+*al agregar puntaje y luego deshacer, se realiza correctamente cuando se crea un jugador, pero no para un jugador del archivo.
 
 (3) coevaluación del trabajo en equipo (usando rúbrica);
 G: Como grupo el trabajo en equipo mejoró considerablemente, de igual modo, la participación de cada integrante tuvo una mejoría, lo cual se demostó en cada sesión que tuvo el grupo para realizar la tarea.
