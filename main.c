@@ -63,7 +63,7 @@ void * busqueda (char *nombreJ, List *lista){
    }
    
    char *items = firstList(aux->items);
-   printf("item: %s\n", items);
+   //printf("item: %s\n", items);
    printf("\nPERFIL JUGADOR:\n");
    printf(" * Nombre jugador: %s \n", aux->nombre);
    printf(" * Puntaje habilidades: %d\n", aux->PH);
@@ -255,14 +255,14 @@ const char *get_csv_field (char * tmp, int k) {
   
   listaaux = createList();
   char *itm = (char*)malloc(sizeof(char)*100);
-  char *aux = (char*)malloc(sizeof(char)*100);
+  //char *aux = (char*)malloc(sizeof(char)*100);
   while (fgets (linea, 1023, fp) != NULL) { // Se lee la linea
     Perfil *datos = malloc(sizeof(Perfil));
     i=0;
     char *aux = (char*)get_csv_field(linea, i);
     while(aux != NULL){
       aux = (char*)get_csv_field(linea, i); // Se obtiene el nombre
-      datos ->items = createList();
+      if(datos->items == NULL) datos ->items = createList();
       if(i == 0){
         strcpy(datos ->nombre, aux );
       }
@@ -276,8 +276,9 @@ const char *get_csv_field (char * tmp, int k) {
       }else{
         if(aux != NULL){
           strcpy(itm, aux);
+          //printf("item: %s\n", itm);
           pushFront(datos -> items, itm);
-        }
+       }
       }
       i++;
     }
